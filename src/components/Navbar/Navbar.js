@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
-import { AuthContext } from '../FirebaseAuthProvider'; // Asegúrate de que la ruta sea correcta
-import logo from '../../assets/logo.png';
+import { AuthContext } from '../FirebaseAuthProvider';
+
 import './Navbar.css';
 
 const Navbar = () => {
@@ -16,16 +16,22 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo-container">
-        <img src={logo} alt="Logo" className="logo" />
         <Link to="/" className="navbar-brand">
+          {/* <img src={logo} alt="Ciudalemana Logo" className="logo" width="30" height="30" /> */}
           Ciudalemana
         </Link>
       </div>
-      <div className="navbar-toggle" onClick={toggleNavbar}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button 
+        className="navbar-toggle" 
+        onClick={toggleNavbar}
+        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+        aria-expanded={isOpen}
+      >
+       
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+      </button>
       <div className={`navbar-items ${isOpen ? 'active' : ''}`}>
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -33,12 +39,11 @@ const Navbar = () => {
               Inicio
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/turno" className="nav-link" onClick={() => setIsOpen(false)}>
-              Agendar Turno
+              Agregar Tema
             </Link>
-          </li>
-          {/* Mostrar el enlace de administrador solo si el usuario es admin */}
+          </li> */}
           {user && isAdmin && (
             <li className="nav-item">
               <Link to="/admin" className="nav-link" onClick={() => setIsOpen(false)}>
